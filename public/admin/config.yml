@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+media_folder: "public/images" # Media files will be stored in the repo under public/images
+public_folder: "/images" # The src attribute for uploaded media will begin with /images
+
+collections:
+  - name: "pages"
+    label: "Page Content"
+    files:
+      - file: "public/content/home.json"
+        label: "Home Page"
+        name: "home"
+        fields:
+          - {label: "Hero Title Line 1", name: "heroTitle1", widget: "string"}
+          - {label: "Hero Title Line 2", name: "heroTitle2", widget: "string"}
+          - {label: "Hero Tagline", name: "heroTagline", widget: "string"}
+          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
+          - {label: "Contact Phone Number", name: "phoneNumber", widget: "string"}
+          - {label: "Show About Us Section?", name: "showAboutUs", widget: "boolean", default: false}
+          - {label: "About Us Text", name: "aboutUsText", widget: "text"}
+          - {label: "Show Google Reviews?", name: "showGoogleReviews", widget: "boolean", default: false}
+          - {label: "Google Reviews Link", name: "googleReviewsLink", widget: "string", required: false}
+          - {label: "Show Yelp Reviews?", name: "showYelpReviews", widget: "boolean", default: false}
+          - {label: "Yelp Reviews Link", name: "yelpReviewsLink", widget: "string", required: false}
+          - {label: "Show FAQ Section?", name: "showFaq", widget: "boolean", default: false}
+          - label: "FAQs"
+            name: "faqs"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Question", name: "question", widget: "string"}
+              - {label: "Answer", name: "answer", widget: "text"}
+          - {label: "Show Testimonials Section?", name: "showTestimonials", widget: "boolean", default: false}
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Client Name", name: "name", widget: "string"}
+              - {label: "Quote", name: "quote", widget: "text"}
+              - {label: "Rating (1-5)", name: "rating", widget: "number", default: 5}
+          - {label: "Show Recent Victories Section?", name: "showRecentVictories", widget: "boolean", default: true}
+          - label: "Recent Victories (Homepage)"
+            name: "recentVictories"
+            widget: "list"
+            required: false
+            fields:
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Tag/Badge Text (Optional)", name: "badge", widget: "string", required: false}
+              - {label: "Title (Optional)", name: "title", widget: "string", required: false}
+              - {label: "Description (Optional)", name: "description", widget: "string", required: false}
+  - name: "gallery"
+    label: "Gallery Projects"
+    folder: "public/content/gallery"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - {label: "Project Title", name: "title", widget: "string"}
+      - {label: "Service Type", name: "serviceType", widget: "select", options: ["Water Damage", "Mold Remediation", "Build Back"]}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Before Image", name: "beforeImage", widget: "image", required: false}
+      - {label: "After Image (or Main Image)", name: "image", widget: "image"}
+
+  - name: "highlights"
+    label: "Highlight Reels"
+    folder: "public/content/highlights"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Title (Optional)", name: "title", widget: "string", required: false}

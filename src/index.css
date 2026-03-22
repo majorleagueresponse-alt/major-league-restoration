@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page: #ffffff;
+  --color-surface: #f3f4f6;
+  --color-body: #111827;
+  --color-muted: #4b5563;
+  --color-dodger-blue: #005A9C;
+  --color-dodger-blue-hover: #1e75b8;
+  --color-dodger-red: #EF3E42;
+  --color-dodger-red-hover: #d32f2f;
+  
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Oswald", sans-serif;
+
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-fade-in-down: fadeInDown 0.8s ease-out;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body { 
+  background-color: #ffffff; 
+  color: #111827; 
+}
+
+h1, h2, h3, h4, h5, h6 { 
+  font-family: var(--font-display); 
+  text-transform: uppercase; 
+}
