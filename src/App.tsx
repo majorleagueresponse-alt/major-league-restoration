@@ -31,6 +31,18 @@ function MainApp() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [homeContent, setHomeContent] = useState<HomeContent | null>(null);
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData as any).toString()
+    }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+      .catch((error) => alert("There was an error submitting your request. Please try again."));
+    e.currentTarget.reset();
+  };
+
   useEffect(() => {
     fetch('/content/home.json')
       .then(res => res.json())
