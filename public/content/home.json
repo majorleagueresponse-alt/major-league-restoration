@@ -28,8 +28,16 @@
         "description": "Safe containment, rigorous HEPA air scrubbing, and total bio-washing clearance."
       },
       {
+        "name": "Fire Damage",
+        "description": "Soot removal, smoke odor elimination, and surface restoration after devastating fires."
+      },
+      {
         "name": "Build Back / Reconstruction",
         "description": "Turnkey solutions from emergency teardown to final paint and finish."
+      },
+      {
+        "name": "Pack Out Services",
+        "description": "Safe inventory, packing, and climate-controlled storage of your belongings during the restoration process."
       }
     ]
   },
@@ -127,9 +135,15 @@
   "footerSection": {
     "description": "Premium water mitigation and mold remediation services. We play in the Major Leagues so you don't have to worry.",
     "licenseNumber": "Lic# 12345678",
-    "area1": "Santa Clarita Valley",
-    "area2": "San Fernando Valley",
-    "area3": "Los Angeles Center",
-    "area4": "Orange County Coast"
+    "serviceAreas": [
+      {"city": "Santa Clarita"},
+      {"city": "San Fernando Valley"},
+      {"city": "Los Angeles"},
+      {"city": "Orange County"},
+      {"city": "Irvine"},
+      {"city": "Anaheim"},
+      {"city": "Yorba Linda"},
+      {"city": "Pasadena"}
+    ]
   }
 }

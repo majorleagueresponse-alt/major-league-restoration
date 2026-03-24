@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { 
   Menu, X, PhoneCall, Phone, ArrowRight, ShieldCheck, Star, 
-  Droplets, AlertTriangle, Send, Home as HomeIcon, MapPin, CheckCircle, Clock, Award, ChevronRight
+  Droplets, AlertTriangle, Send, Home as HomeIcon, MapPin, CheckCircle, Clock, Award, ChevronRight,
+  Flame, Boxes
 } from 'lucide-react';
 import GalleryPage from './pages/GalleryPage';
 import CitySeoPage from './pages/CitySeoPage';
@@ -18,7 +19,7 @@ export interface HomeContent {
   victoriesSection?: { show: boolean, items: Array<{image: string, badge?: string, title?: string, description?: string}> };
   testimonialsSection?: { show: boolean, items: Array<{name: string, quote: string, rating: number}> };
   faqSection?: { show: boolean, items: Array<{question: string, answer: string}> };
-  footerSection?: { description: string, licenseNumber: string, area1: string, area2: string, area3: string, area4: string };
+  footerSection?: { description: string, licenseNumber: string, serviceAreas: Array<{city: string}> };
 }
 
 function MainApp() {
@@ -226,9 +227,9 @@ function MainApp() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                 {homeContent.servicesSection?.items?.map((service, idx) => {
-                    const icons = [Droplets, AlertTriangle, HomeIcon];
+                    const icons = [Droplets, AlertTriangle, Flame, HomeIcon, Boxes];
                     const IconComponent = icons[idx % icons.length];
-                    const colors = ["text-dodger-blue", "text-dodger-red", "text-gray-900"];
+                    const colors = ["text-dodger-blue", "text-dodger-red", "text-dodger-blue", "text-gray-900", "text-dodger-blue"];
                     const colorClass = colors[idx % colors.length];
                     return (
                         <div key={idx} className={`bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 group`}>
@@ -362,9 +363,9 @@ function MainApp() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[homeContent.footerSection?.area1, homeContent.footerSection?.area2, homeContent.footerSection?.area3, homeContent.footerSection?.area4].map((city, idx) => city && (
+                {homeContent.footerSection?.serviceAreas?.map((area, idx) => area.city && (
                     <div key={idx} className="bg-white p-4 border border-gray-200 rounded text-center shadow-sm font-bold text-gray-700">
-                        {city}
+                        {area.city}
                     </div>
                 ))}
             </div>
@@ -491,10 +492,9 @@ function MainApp() {
                 <div>
                    <h4 className="text-white font-black uppercase tracking-widest mb-6 font-display">Service Areas</h4>
                   <ul className="space-y-3 font-medium text-gray-400">
-                    <li><Link to="/service-areas/santa-clarita" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area1}</Link></li>
-                    <li><Link to="/service-areas/san-fernando" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area2}</Link></li>
-                    <li><Link to="/service-areas/los-angeles" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area3}</Link></li>
-                    <li><Link to="/service-areas/orange-county" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area4}</Link></li>
+                    {homeContent.footerSection?.serviceAreas?.slice(0, 4).map((area, idx) => area.city && (
+                        <li key={idx}><Link to={`/service-areas/${area.city.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-dodger-blue transition-colors">{area.city}</Link></li>
+                    ))}
                   </ul>
                 </div>
                 <div>

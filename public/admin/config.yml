@@ -126,10 +126,11 @@ collections:
             fields:
               - {label: "Company Description", name: "description", widget: "text"}
               - {label: "License Number", name: "licenseNumber", widget: "string"}
-              - {label: "Service Area 1", name: "area1", widget: "string", default: "Santa Clarita Valley"}
-              - {label: "Service Area 2", name: "area2", widget: "string", default: "San Fernando Valley"}
-              - {label: "Service Area 3", name: "area3", widget: "string", default: "Los Angeles Center"}
-              - {label: "Service Area 4", name: "area4", widget: "string", default: "Orange County Coast"}
+              - label: "Service Areas"
+                name: "serviceAreas"
+                widget: "list"
+                fields:
+                  - {label: "City", name: "city", widget: "string"}
 
   - name: "gallery"
     label: "Gallery Projects"
