@@ -39,7 +39,7 @@ function MainApp() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(formData as any).toString()
     }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
-      .catch((error) => alert("There was an error submitting your request. Please try again."));
+      .catch(() => alert("There was an error submitting your request. Please try again."));
     e.currentTarget.reset();
   };
 
