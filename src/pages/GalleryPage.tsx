@@ -1,26 +1,54 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PhoneCall, Send } from 'lucide-react';
+import type { HomeContent } from '../App';
 
 // Read all gallery JSON files created by Decap CMS at build time
 const galleryFiles = import.meta.glob('/public/content/gallery/*.json', { eager: true });
 const galleryItems = Object.values(galleryFiles).map((mod: any) => mod.default || mod);
+// Filter out items explicitly marked as visible: false
+const activeGallery = galleryItems.filter(item => item.visible !== false);
 
 // Read all highlight reel JSON files 
 const highlightFiles = import.meta.glob('/public/content/highlights/*.json', { eager: true });
 const highlightItems = Object.values(highlightFiles).map((mod: any) => mod.default || mod);
+// Filter out items explicitly marked as visible: false
+const activeHighlights = highlightItems.filter(item => item.visible !== false);
 
 function GalleryPage() {
+    const [globalSettings, setGlobalSettings] = useState<HomeContent['global'] | null>(null);
+
+    useEffect(() => {
+        fetch('/content/home.json')
+          .then(res => res.json())
+          .then(data => setGlobalSettings(data.global))
+          .catch(() => {});
+    }, []);
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString()
-        }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
-          .catch(() => alert("There was an error submitting your request. Please try again."));
+        const accessKey = globalSettings?.formAccessKey;
+
+        if (accessKey && accessKey.trim() !== "") {
+            formData.append("access_key", accessKey);
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+              .catch(() => alert("There was an error submitting your request. Please try again."));
+        } else {
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData as any).toString()
+            }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+              .catch(() => alert("There was an error submitting your request. Please try again."));
+        }
         e.currentTarget.reset();
     };
+
+    const phone = globalSettings?.phoneNumber || "(555) 555-0199";
 
     return (
         <div className="bg-gray-50 text-gray-900 font-sans min-h-screen pt-24">
@@ -33,8 +61,8 @@ function GalleryPage() {
                 <div className="hidden lg:flex items-center gap-8">
                     <Link to="/" className="text-gray-700 hover:text-dodger-blue font-display font-bold uppercase tracking-widest text-sm transition-colors">Home</Link>
                     <Link to="/gallery" className="text-dodger-blue font-display font-bold uppercase tracking-widest text-sm transition-colors">Our Gallery</Link>
-                    <a href="tel:5555550199" className="flex items-center gap-2 bg-dodger-red text-white px-5 py-2.5 rounded shadow-lg shadow-dodger-red/30 font-display font-bold uppercase text-sm hover:bg-dodger-red-hover hover:scale-105 transition-all">
-                        <PhoneCall className="w-4 h-4" /> (555) 555-0199
+                    <a href={`tel:${phone.replace(/\D/g,'')}`} className="flex items-center gap-2 bg-dodger-red text-white px-5 py-2.5 rounded shadow-lg shadow-dodger-red/30 font-display font-bold uppercase text-sm hover:bg-dodger-red-hover hover:scale-105 transition-all">
+                        <PhoneCall className="w-4 h-4" /> {phone}
                     </a>
                 </div>
                 </div>
@@ -47,7 +75,7 @@ function GalleryPage() {
 
             <section className="py-16">
                 <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {galleryItems.map((item: any, index: number) => (
+                    {activeGallery.map((item: any, index: number) => (
                          <div key={index} className="bg-white rounded-md shadow-xl overflow-hidden border border-gray-100 flex flex-col">
                             <div className="relative h-64 overflow-hidden group">
                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -59,16 +87,16 @@ function GalleryPage() {
                             </div>
                         </div>
                     ))}
-                    {galleryItems.length === 0 && (
-                        <div className="col-span-full text-center text-gray-500 py-12">
-                            No gallery projects found. Add some via the CMS dashboard!
+                    {activeGallery.length === 0 && (
+                        <div className="col-span-full text-center text-gray-500 py-12 font-medium">
+                            No active gallery projects found. View your CMS dashboard to add or unhide them!
                         </div>
                     )}
                 </div>
             </section>
 
             {/* Highlight Reels Section */}
-            {highlightItems.length > 0 && (
+            {activeHighlights.length > 0 && (
                 <section className="py-16 bg-white border-t border-gray-100">
                     <div className="container mx-auto px-4">
                         <div className="text-center mb-12">
@@ -77,7 +105,7 @@ function GalleryPage() {
                             <p className="text-gray-600 font-medium">Quick glimpses into our daily restoration victories.</p>
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {highlightItems.map((item: any, index: number) => (
+                            {activeHighlights.map((item: any, index: number) => (
                                 <div key={index} className="relative group overflow-hidden rounded-lg shadow-md aspect-square bg-gray-100">
                                     <img src={item.image} alt={item.title || "Highlight Reel"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                     {item.title && (

@@ -7,23 +7,18 @@ import {
 import GalleryPage from './pages/GalleryPage';
 import CitySeoPage from './pages/CitySeoPage';
 
-interface HomeContent {
-  heroTitle1: string;
-  heroTitle2: string;
-  heroTagline: string;
-  heroSubtitle: string;
-  phoneNumber: string;
-  aboutUsText: string;
-  showGoogleReviews?: boolean;
-  googleReviewsLink?: string;
-  showYelpReviews?: boolean;
-  yelpReviewsLink?: string;
-  showFaq?: boolean;
-  faqs?: Array<{question: string, answer: string}>;
-  showTestimonials?: boolean;
-  testimonials?: Array<{name: string, quote: string, rating: number}>;
-  showRecentVictories?: boolean;
-  recentVictories?: Array<{ image: string, badge?: string, title?: string, description?: string }>;
+export interface HomeContent {
+  global?: { phoneNumber: string, companyEmail: string, formAccessKey: string };
+  hero?: { title1: string, title2: string, tagline: string, subtitle: string };
+  about?: { show: boolean, header: string, text: string, image: string };
+  servicesSection?: { show: boolean, items: Array<{name: string, description: string}> };
+  processSection?: { show: boolean, steps: Array<{title: string, description: string, image: string}> };
+  insuranceSection?: { show: boolean, header: string, text: string };
+  reviews?: { showGoogle: boolean, googleLink?: string, showYelp: boolean, yelpLink?: string };
+  victoriesSection?: { show: boolean, items: Array<{image: string, badge?: string, title?: string, description?: string}> };
+  testimonialsSection?: { show: boolean, items: Array<{name: string, quote: string, rating: number}> };
+  faqSection?: { show: boolean, items: Array<{question: string, answer: string}> };
+  footerSection?: { description: string, licenseNumber: string, area1: string, area2: string, area3: string, area4: string };
 }
 
 function MainApp() {
@@ -34,12 +29,25 @@ function MainApp() {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData as any).toString()
-    }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
-      .catch(() => alert("There was an error submitting your request. Please try again."));
+    const accessKey = homeContent?.global?.formAccessKey;
+    
+    if (accessKey && accessKey.trim() !== "") {
+        // Submit via Web3Forms using the CMS access key
+        formData.append("access_key", accessKey);
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+          .catch(() => alert("There was an error submitting your request. Please try again."));
+    } else {
+        // Fallback to Netlify Forms native handling
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData as any).toString()
+        }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+          .catch(() => alert("There was an error submitting your request. Please try again."));
+    }
     e.currentTarget.reset();
   };
 
@@ -55,6 +63,8 @@ function MainApp() {
   }, []);
 
   if (!homeContent) return <div className="min-h-screen flex items-center justify-center font-display text-dodger-blue text-2xl animate-pulse">Loading Setup...</div>;
+
+  const phone = homeContent.global?.phoneNumber || "1 (800) 555-0199";
 
   return (
     <div className="bg-white text-gray-900 font-sans selection:bg-dodger-blue selection:text-white">
@@ -72,8 +82,8 @@ function MainApp() {
             <a href="#insurance" className={`font-display font-bold uppercase tracking-widest text-sm transition-colors relative ${isScrolled ? 'text-gray-700 hover:text-dodger-blue' : 'text-gray-800 hover:text-dodger-blue'}`}>Insurance</a>
             <a href="#contact" className={`font-display font-bold uppercase tracking-widest text-sm transition-colors relative ${isScrolled ? 'text-gray-700 hover:text-dodger-blue' : 'text-gray-800 hover:text-dodger-blue'}`}>Contact</a>
             
-            <a href={`tel:${homeContent.phoneNumber.replace(/\D/g,'')}`} className="flex items-center gap-2 bg-dodger-red text-white px-5 py-2.5 rounded shadow-lg shadow-dodger-red/30 font-display font-bold uppercase text-sm hover:bg-dodger-red-hover hover:scale-105 transition-all">
-              <PhoneCall className="w-4 h-4" /> {homeContent.phoneNumber}
+            <a href={`tel:${phone.replace(/\D/g,'')}`} className="flex items-center gap-2 bg-dodger-red text-white px-5 py-2.5 rounded shadow-lg shadow-dodger-red/30 font-display font-bold uppercase text-sm hover:bg-dodger-red-hover hover:scale-105 transition-all">
+              <PhoneCall className="w-4 h-4" /> {phone}
             </a>
           </div>
           <button className="lg:hidden focus:outline-none text-dodger-blue" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -89,7 +99,7 @@ function MainApp() {
             <a href="#process" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-900 font-display font-bold uppercase tracking-wider py-3 border-b border-gray-100">Our Process</a>
             <Link to="/gallery" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-900 font-display font-bold uppercase tracking-wider py-3 border-b border-gray-100">Our Gallery</Link>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-gray-900 font-display font-bold uppercase tracking-wider py-3 border-b border-gray-100">Contact</a>
-            <a href={`tel:${homeContent.phoneNumber.replace(/\D/g,'')}`} className="mt-6 bg-dodger-blue text-white text-center py-4 font-display text-xl font-bold uppercase tracking-widest rounded shadow-md flex justify-center items-center gap-3">
+            <a href={`tel:${phone.replace(/\D/g,'')}`} className="mt-6 bg-dodger-blue text-white text-center py-4 font-display text-xl font-bold uppercase tracking-widest rounded shadow-md flex justify-center items-center gap-3">
               <Phone className="w-6 h-6" /> Call Now
             </a>
           </div>
@@ -99,7 +109,6 @@ function MainApp() {
       {/* Hero */}
       <section className="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden bg-gray-50 pt-32 pb-20 md:pt-24">
         <div className="absolute inset-0 bg-white opacity-80 z-0"></div>
-        {/* Abstract Background pattern */}
         <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-50 blur-3xl z-0"></div>
         <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-red-50 blur-3xl z-0"></div>
 
@@ -114,16 +123,16 @@ function MainApp() {
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-900 mb-6 tracking-tighter drop-shadow-xl leading-[0.9] uppercase font-display">
-            <span className="text-dodger-blue">{homeContent.heroTitle1}</span> <br /> 
-            <span className="text-dodger-red">{homeContent.heroTitle2}</span>
+            <span className="text-dodger-blue">{homeContent.hero?.title1 || "When every second"}</span> <br /> 
+            <span className="text-dodger-red">{homeContent.hero?.title2 || "Counts."}</span>
           </h1>
           
           <h2 className="text-xl md:text-3xl text-gray-800 font-black font-display uppercase tracking-widest mb-6 px-4 py-2 border-y-2 border-dodger-red inline-block">
-            {homeContent.heroTagline}
+            {homeContent.hero?.tagline || "24/7 EMERGENCY RESPONSE"}
           </h2>
           
           <p className="text-gray-600 text-lg md:text-xl max-w-3xl mb-12 leading-relaxed font-medium">
-             {homeContent.heroSubtitle}
+             {homeContent.hero?.subtitle || "Top-rated water damage mitigation and mold remediation services."}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-5 w-full justify-center mb-10 px-4">
@@ -136,16 +145,16 @@ function MainApp() {
           </div>
 
           {/* Optional Google/Yelp Review Badges */}
-          {(homeContent.showGoogleReviews || homeContent.showYelpReviews) && (
+          {homeContent.reviews && (homeContent.reviews.showGoogle || homeContent.reviews.showYelp) && (
              <div className="flex flex-wrap justify-center items-center gap-4 mt-6">
-                {homeContent.showGoogleReviews && homeContent.googleReviewsLink && (
-                  <a href={homeContent.googleReviewsLink} target="_blank" rel="noopener noreferrer" className="bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm flex items-center gap-2 hover:border-blue-500 hover:shadow-md transition-all">
+                {homeContent.reviews.showGoogle && homeContent.reviews.googleLink && (
+                  <a href={homeContent.reviews.googleLink} target="_blank" rel="noopener noreferrer" className="bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm flex items-center gap-2 hover:border-blue-500 hover:shadow-md transition-all">
                       <span className="font-bold text-gray-800">Review us on <span className="text-blue-600">Google</span></span>
                       <div className="flex"><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /></div>
                   </a>
                 )}
-                {homeContent.showYelpReviews && homeContent.yelpReviewsLink && (
-                  <a href={homeContent.yelpReviewsLink} target="_blank" rel="noopener noreferrer" className="bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm flex items-center gap-2 hover:border-red-500 hover:shadow-md transition-all">
+                {homeContent.reviews.showYelp && homeContent.reviews.yelpLink && (
+                  <a href={homeContent.reviews.yelpLink} target="_blank" rel="noopener noreferrer" className="bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm flex items-center gap-2 hover:border-red-500 hover:shadow-md transition-all">
                       <span className="font-bold text-gray-800">Find us on <span className="text-red-600">Yelp</span></span>
                       <div className="flex"><Star className="w-4 h-4 text-red-500 fill-red-500" /><Star className="w-4 h-4 text-red-500 fill-red-500" /><Star className="w-4 h-4 text-red-500 fill-red-500" /><Star className="w-4 h-4 text-red-500 fill-red-500" /><Star className="w-4 h-4 text-red-500 fill-red-500" /></div>
                   </a>
@@ -176,25 +185,23 @@ function MainApp() {
         </div>
       </section>
 
-      {/* About Us (Always Visible Now) */}
+      {/* About Us */}
+      {homeContent.about?.show !== false && (
       <section id="about" className="py-24 bg-white">
         <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-16 items-center">
             <div className="lg:w-1/2 relative">
                 <div className="absolute -inset-4 bg-dodger-blue/10 rounded-xl transform -rotate-3 z-0"></div>
-                <img src="/images/for-website/major league difference .jpg" alt="Team at work" className="relative z-10 rounded-xl shadow-2xl w-full object-cover h-[500px]" />
+                <img src={homeContent.about?.image || "/images/for-website/major league difference .jpg"} alt="Team at work" className="relative z-10 rounded-xl shadow-2xl w-full object-cover h-[500px]" />
                 <div className="absolute -bottom-10 -right-10 bg-white p-6 rounded-xl shadow-xl z-20 hidden md:block border-t-4 border-dodger-red">
                     <img src="/assets/new-shield-logo.png" className="w-32" alt="Logo" />
                 </div>
             </div>
             <div className="lg:w-1/2">
                 <h2 className="text-sm font-bold text-dodger-red tracking-[0.2em] uppercase mb-2">Who We Are</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 font-display uppercase">The Major League Difference</h3>
+                <h3 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 font-display uppercase">{homeContent.about?.header || "The Major League Difference"}</h3>
                 <div className="h-1.5 w-24 bg-dodger-blue rounded-full mb-8"></div>
-                <p className="text-lg text-gray-600 leading-relaxed font-medium mb-6">
-                    {homeContent.aboutUsText}
-                </p>
-                <p className="text-lg text-gray-600 leading-relaxed font-medium mb-8">
-                    When water damage strikes or mold infests your home, you shouldn't have to deal with amateur contractors. We step up to the plate with heavy-duty equipment, precise moisture mapping, and complete build-back services entirely handled in-house.
+                <p className="text-lg text-gray-600 leading-relaxed font-medium mb-6 whitespace-pre-wrap">
+                    {homeContent.about?.text || "Professional robust water and mold restoration services."}
                 </p>
                 <ul className="space-y-4 mb-8">
                     <li className="flex items-center gap-3 text-gray-800 font-bold"><CheckCircle className="text-dodger-blue w-6 h-6" /> Local Southern California Experts</li>
@@ -207,8 +214,10 @@ function MainApp() {
             </div>
         </div>
       </section>
+      )}
 
-      {/* Services Section Complete */}
+      {/* Services Section */}
+      {homeContent.servicesSection?.show !== false && (
       <section id="services" className="py-24 bg-gray-50 border-y border-gray-200">
         <div className="container mx-auto px-4 text-center">
             <h2 className="text-sm font-bold text-dodger-blue tracking-[0.2em] uppercase mb-2">Our Playbook</h2>
@@ -216,46 +225,26 @@ function MainApp() {
             <div className="h-1.5 w-32 bg-gradient-to-r from-dodger-blue to-dodger-red mx-auto rounded-full mb-16"></div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                {/* Service 1 */}
-                <div className="bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl hover:border-dodger-blue transition-all duration-300 group">
-                    <Droplets className="w-12 h-12 text-dodger-blue mb-6 group-hover:scale-110 transition-transform" />
-                    <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">Water Mitigation</h4>
-                    <p className="text-gray-600 leading-relaxed text-sm">Industrial water extraction, structural drying, and dehumidification. We solve leaks and floods fast.</p>
-                </div>
-                {/* Service 2 */}
-                <div className="bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl hover:border-dodger-red transition-all duration-300 group">
-                    <AlertTriangle className="w-12 h-12 text-dodger-red mb-6 group-hover:scale-110 transition-transform" />
-                    <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">Mold Remediation</h4>
-                    <p className="text-gray-600 leading-relaxed text-sm">Safe containment, aggressive removal, and air scrubbing to ensure your home is breathable.</p>
-                </div>
-                 {/* Service 3 */}
-                 <div className="bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl hover:border-dodger-blue transition-all duration-300 group">
-                    <svg className="w-12 h-12 text-dodger-blue mb-6 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                    </svg>
-                    <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">Fire Damage</h4>
-                    <p className="text-gray-600 leading-relaxed text-sm">Soot removal, smoke odor elimination, and surface restoration after devastating fires.</p>
-                </div>
-                 {/* Service 4 */}
-                 <div className="bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl hover:border-gray-900 transition-all duration-300 group">
-                    <HomeIcon className="w-12 h-12 text-gray-900 mb-6 group-hover:scale-110 transition-transform" />
-                    <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">Build Back</h4>
-                    <p className="text-gray-600 leading-relaxed text-sm">Full reconstruction services. Put the tear-out back together with our licensed contractors.</p>
-                </div>
-                {/* Service 5 */}
-                <div className="bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl hover:border-dodger-blue transition-all duration-300 group">
-                    <svg className="w-12 h-12 text-dodger-blue mb-6 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                    </svg>
-                    <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">Pack Out Services</h4>
-                    <p className="text-gray-600 leading-relaxed text-sm">Safe inventory, packing, and climate-controlled storage of your belongings during the restoration process.</p>
-                </div>
+                {homeContent.servicesSection?.items?.map((service, idx) => {
+                    const icons = [Droplets, AlertTriangle, HomeIcon];
+                    const IconComponent = icons[idx % icons.length];
+                    const colors = ["text-dodger-blue", "text-dodger-red", "text-gray-900"];
+                    const colorClass = colors[idx % colors.length];
+                    return (
+                        <div key={idx} className={`bg-white p-8 border border-gray-100 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 group`}>
+                            <IconComponent className={`w-12 h-12 ${colorClass} mb-6 group-hover:scale-110 transition-transform`} />
+                            <h4 className="text-xl font-black text-gray-900 mb-3 uppercase font-display tracking-wide">{service.name}</h4>
+                            <p className="text-gray-600 leading-relaxed text-sm">{service.description}</p>
+                        </div>
+                    );
+                })}
             </div>
         </div>
       </section>
+      )}
 
       {/* 3 Steps Process */}
+      {homeContent.processSection?.show !== false && (
       <section id="process" className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-16">
@@ -266,42 +255,36 @@ function MainApp() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
                 <div className="hidden md:block absolute top-[45px] left-[15%] right-[15%] h-1 bg-gray-200 z-0 border-t-2 border-dashed border-gray-300"></div>
                 
-                <div className="relative z-10 flex flex-col text-left bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 pb-8 hover:-translate-y-2 transition-transform duration-300">
-                    <img src="/images/for-website/inspection .jpg" alt="Inspection Process" className="w-full h-64 object-cover border-b-4 border-dodger-blue mb-6" />
-                    <div className="flex items-center gap-4 mb-4 px-6">
-                        <div className="w-14 h-14 bg-dodger-blue text-white rounded-full flex items-center justify-center text-2xl font-black flex-shrink-0 shadow-lg font-display">1</div>
-                        <h4 className="text-2xl font-black font-display uppercase">Inspection</h4>
-                    </div>
-                    <p className="text-gray-600 px-6 font-medium leading-relaxed">We arrive rapidly, assess the damage, map moisture levels, and give you a clear, honest evaluation.</p>
-                </div>
-                <div className="relative z-10 flex flex-col text-left bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 pb-8 hover:-translate-y-2 transition-transform duration-300">
-                    <img src="/images/for-website/mitigation.jpg" alt="Mitigation Process" className="w-full h-64 object-cover border-b-4 border-dodger-red mb-6" />
-                    <div className="flex items-center gap-4 mb-4 px-6">
-                        <div className="w-14 h-14 bg-dodger-red text-white rounded-full flex items-center justify-center text-2xl font-black flex-shrink-0 shadow-lg font-display">2</div>
-                        <h4 className="text-2xl font-black font-display uppercase">Mitigation</h4>
-                    </div>
-                    <p className="text-gray-600 px-6 font-medium leading-relaxed">Heavy duty extraction, tear-out of unsalvageable material, mold abatement, and industrial drying.</p>
-                </div>
-                <div className="relative z-10 flex flex-col text-left bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 pb-8 hover:-translate-y-2 transition-transform duration-300">
-                    <img src="/images/for-website/restoration.jpg" alt="Restoration Process" className="w-full h-64 object-cover border-b-4 border-gray-900 mb-6" />
-                    <div className="flex items-center gap-4 mb-4 px-6">
-                        <div className="w-14 h-14 bg-gray-900 text-white rounded-full flex items-center justify-center text-2xl font-black flex-shrink-0 shadow-lg font-display">3</div>
-                        <h4 className="text-2xl font-black font-display uppercase">Restoration</h4>
-                    </div>
-                    <p className="text-gray-600 px-6 font-medium leading-relaxed">Rebuilding your property to pre-loss conditions while we handle the direct billing with insurance.</p>
-                </div>
+                {homeContent.processSection?.steps?.map((step, idx) => {
+                    const bgColors = ["bg-dodger-blue", "bg-dodger-red", "bg-gray-900"];
+                    const borderColors = ["border-dodger-blue", "border-dodger-red", "border-gray-900"];
+                    const cssBg = bgColors[idx % bgColors.length];
+                    const cssBorder = borderColors[idx % borderColors.length];
+                    return (
+                        <div key={idx} className="relative z-10 flex flex-col text-left bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 pb-8 hover:-translate-y-2 transition-transform duration-300">
+                            <img src={step.image} alt={step.title} className={`w-full h-64 object-cover border-b-4 ${cssBorder} mb-6`} />
+                            <div className="flex items-center gap-4 mb-4 px-6">
+                                <div className={`w-14 h-14 ${cssBg} text-white rounded-full flex items-center justify-center text-2xl font-black flex-shrink-0 shadow-lg font-display`}>{idx + 1}</div>
+                                <h4 className="text-2xl font-black font-display uppercase">{step.title}</h4>
+                            </div>
+                            <p className="text-gray-600 px-6 font-medium leading-relaxed">{step.description}</p>
+                        </div>
+                    );
+                })}
             </div>
         </div>
       </section>
+      )}
 
       {/* Insurance Section */}
+      {homeContent.insuranceSection?.show !== false && (
       <section id="insurance" className="py-24 bg-dodger-blue relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10 flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 text-white">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight font-display uppercase">Zero Hassle. <br/><span className="text-dodger-red drop-shadow-md">Direct Billing.</span></h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight font-display uppercase">{homeContent.insuranceSection?.header || "Insurance Claims"}</h2>
             <div className="h-1 w-24 bg-dodger-red rounded-full mb-8"></div>
             <p className="text-xl mb-6 text-blue-50 leading-relaxed font-light">
-              Dealing with property damage is stressful enough without fighting adjusters. As a Major League team, we handle the entire claim for you so you can focus on your life.
+              {homeContent.insuranceSection?.text}
             </p>
             <ul className="space-y-5 mb-10">
               <li className="flex items-start gap-4 font-medium text-lg text-white">
@@ -319,12 +302,14 @@ function MainApp() {
           </div>
           <div className="lg:w-1/2 relative">
              <div className="absolute inset-0 bg-dodger-red transform translate-x-6 translate-y-6 rounded-2xl opacity-60"></div>
-             <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Insurance Process" className="relative rounded-xl shadow-2xl w-full h-[500px] object-cover border-4 border-white" />
+             <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Insurance" className="relative rounded-xl shadow-2xl w-full h-[500px] object-cover border-4 border-white" />
           </div>
         </div>
       </section>
+      )}
 
-      {/* Gallery Section */}
+      {/* Gallery Section - Recent Victories */}
+      {homeContent.victoriesSection?.show !== false && (
       <section className="py-24 bg-white relative">
         <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -334,7 +319,7 @@ function MainApp() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 text-left">
-                {homeContent.showRecentVictories !== false && homeContent.recentVictories && homeContent.recentVictories.map((victory, idx) => {
+                {homeContent.victoriesSection?.items?.map((victory, idx) => {
                     const colors = [
                         "border-dodger-blue text-dodger-blue",
                         "border-dodger-red text-dodger-red",
@@ -364,8 +349,9 @@ function MainApp() {
             </div>
         </div>
       </section>
+      )}
 
-      {/* Service Areas (Grid display) */}
+      {/* Service Areas */}
       <section className="py-24 bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12">
@@ -376,8 +362,8 @@ function MainApp() {
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {['Santa Clarita', 'San Fernando Valley', 'Los Angeles', 'Orange County', 'Irvine', 'Anaheim', 'Yorba Linda', 'Pasadena'].map(city => (
-                    <div key={city} className="bg-white p-4 border border-gray-200 rounded text-center shadow-sm font-bold text-gray-700">
+                {[homeContent.footerSection?.area1, homeContent.footerSection?.area2, homeContent.footerSection?.area3, homeContent.footerSection?.area4].map((city, idx) => city && (
+                    <div key={idx} className="bg-white p-4 border border-gray-200 rounded text-center shadow-sm font-bold text-gray-700">
                         {city}
                     </div>
                 ))}
@@ -401,7 +387,7 @@ function MainApp() {
                     </div>
                     <div>
                         <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">24/7 Dispatch</h3>
-                        <a href={`tel:${homeContent.phoneNumber.replace(/\D/g,'')}`} className="text-3xl font-black text-dodger-blue font-display tracking-wider hover:text-dodger-blue-hover transition-colors">{homeContent.phoneNumber}</a>
+                        <a href={`tel:${phone.replace(/\D/g,'')}`} className="text-3xl font-black text-dodger-blue font-display tracking-wider hover:text-dodger-blue-hover transition-colors">{phone}</a>
                     </div>
                 </div>
              </div>
@@ -434,15 +420,15 @@ function MainApp() {
         </div>
       </section>
 
-      {/* Optional Testimonials Section */}
-      {homeContent.showTestimonials && homeContent.testimonials && homeContent.testimonials.length > 0 && (
+      {/* Testimonials */}
+      {homeContent.testimonialsSection?.show !== false && homeContent.testimonialsSection?.items?.length && (
         <section className="py-24 bg-gray-900 border-t-8 border-dodger-blue">
             <div className="container mx-auto px-4 text-center">
                 <h2 className="text-sm font-bold text-dodger-blue tracking-[0.2em] uppercase mb-2">Client Success</h2>
                 <h3 className="text-4xl md:text-5xl font-black text-white mb-12 font-display uppercase">What Our Clients Say</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {homeContent.testimonials.map((t, idx) => (
+                    {homeContent.testimonialsSection.items.map((t, idx) => (
                         <div key={idx} className="bg-gray-800 p-8 rounded-xl shadow-2xl text-left border border-gray-700">
                             <div className="flex mb-4">
                                 {[...Array(t.rating || 5)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />)}
@@ -456,8 +442,8 @@ function MainApp() {
         </section>
       )}
 
-      {/* Optional FAQ Section */}
-      {homeContent.showFaq && homeContent.faqs && homeContent.faqs.length > 0 && (
+      {/* FAQ Section */}
+      {homeContent.faqSection?.show !== false && homeContent.faqSection?.items?.length && (
         <section className="py-24 bg-white border-t border-gray-200">
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="text-center mb-16">
@@ -466,7 +452,7 @@ function MainApp() {
                 </div>
                 
                 <div className="space-y-4">
-                    {homeContent.faqs.map((faq, idx) => (
+                    {homeContent.faqSection.items.map((faq, idx) => (
                         <details key={idx} className="group bg-gray-50 border border-gray-200 rounded-lg outline-none custom-transition-all">
                             <summary className="font-bold flex cursor-pointer items-center justify-between p-6 text-gray-900 list-none text-lg">
                                 {faq.question}
@@ -491,41 +477,40 @@ function MainApp() {
                 <div>
                     <img src="/assets/new-shield-logo.png" alt="Major League Response Logo" className="h-24 mb-6 drop-shadow-md bg-white p-2 rounded" />
                     <p className="text-sm leading-relaxed mb-6 font-medium text-gray-400">
-                        Premium water mitigation and mold remediation services. We play in the Major Leagues so you don't have to worry.
+                        {homeContent.footerSection?.description || "Premium water mitigation and mold remediation services."}
                     </p>
                 </div>
                 <div>
                     <h4 className="text-white font-black uppercase tracking-widest mb-6 font-display">Services</h4>
                     <ul className="space-y-3 font-medium text-gray-400">
-                        <li><a href="#services" className="hover:text-dodger-blue transition-colors">Water Damage</a></li>
-                        <li><a href="#services" className="hover:text-dodger-blue transition-colors">Mold Remediation</a></li>
-                        <li><a href="#services" className="hover:text-dodger-blue transition-colors">Build Back / Construction</a></li>
-                        <li><a href="#insurance" className="hover:text-dodger-blue transition-colors">Insurance Claims</a></li>
+                        {homeContent.servicesSection?.items?.slice(0,4).map((s,i) => (
+                           <li key={i}><a href="#services" className="hover:text-dodger-blue transition-colors">{s.name}</a></li>
+                        ))}
                     </ul>
                 </div>
                 <div>
                    <h4 className="text-white font-black uppercase tracking-widest mb-6 font-display">Service Areas</h4>
                   <ul className="space-y-3 font-medium text-gray-400">
-                    <li><Link to="/service-areas/santa-clarita" className="hover:text-dodger-blue transition-colors">Santa Clarita Valley</Link></li>
-                    <li><Link to="/service-areas/san-fernando" className="hover:text-dodger-blue transition-colors">San Fernando Valley</Link></li>
-                    <li><Link to="/service-areas/los-angeles" className="hover:text-dodger-blue transition-colors">Los Angeles Center</Link></li>
-                    <li><Link to="/service-areas/orange-county" className="hover:text-dodger-blue transition-colors">Orange County Coast</Link></li>
+                    <li><Link to="/service-areas/santa-clarita" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area1}</Link></li>
+                    <li><Link to="/service-areas/san-fernando" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area2}</Link></li>
+                    <li><Link to="/service-areas/los-angeles" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area3}</Link></li>
+                    <li><Link to="/service-areas/orange-county" className="hover:text-dodger-blue transition-colors">{homeContent.footerSection?.area4}</Link></li>
                   </ul>
                 </div>
                 <div>
                     <h4 className="text-white font-black uppercase tracking-widest mb-6 font-display">Contact</h4>
                     <ul className="space-y-4 font-medium text-gray-400">
-                        <li className="flex items-center gap-3"><Phone className="w-5 h-5 text-dodger-blue" /> {homeContent.phoneNumber} </li>
-                        <li className="flex items-start gap-3"><AlertTriangle className="w-5 h-5 text-dodger-red mt-0.5" /> 24/7 Emergency Service</li>
+                        <li className="flex items-center gap-3"><Phone className="w-5 h-5 text-dodger-blue" /> {phone} </li>
+                        <li className="flex items-center gap-3"><AlertTriangle className="w-5 h-5 text-dodger-red" /> 24/7 Emergency Service</li>
                         <li className="mt-6 p-4 rounded border border-gray-700 bg-gray-800 xl:inline-block">
-                            <strong className="text-white block mb-1">Lic# 12345678</strong>
+                            <strong className="text-white block mb-1">{homeContent.footerSection?.licenseNumber || "Lic# 12345678"}</strong>
                             <span className="text-xs">Bonded & Fully Insured</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-gray-500">
-                <p>&copy; 2024 Major League Response. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Major League Response. All rights reserved.</p>
                 <div className="flex gap-6">
                     <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                 </div>

@@ -1,9 +1,9 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  branch: main
 
-media_folder: "public/images" # Media files will be stored in the repo under public/images
-public_folder: "/images" # The src attribute for uploaded media will begin with /images
+media_folder: "public/images"
+public_folder: "/images"
 
 collections:
   - name: "pages"
@@ -13,50 +13,131 @@ collections:
         label: "Home Page"
         name: "home"
         fields:
-          - {label: "Hero Title Line 1", name: "heroTitle1", widget: "string"}
-          - {label: "Hero Title Line 2", name: "heroTitle2", widget: "string"}
-          - {label: "Hero Tagline", name: "heroTagline", widget: "string"}
-          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
-          - {label: "Contact Phone Number", name: "phoneNumber", widget: "string"}
-          - {label: "Show About Us Section?", name: "showAboutUs", widget: "boolean", default: false}
-          - {label: "About Us Text", name: "aboutUsText", widget: "text"}
-          - {label: "Show Google Reviews?", name: "showGoogleReviews", widget: "boolean", default: false}
-          - {label: "Google Reviews Link", name: "googleReviewsLink", widget: "string", required: false}
-          - {label: "Show Yelp Reviews?", name: "showYelpReviews", widget: "boolean", default: false}
-          - {label: "Yelp Reviews Link", name: "yelpReviewsLink", widget: "string", required: false}
-          - {label: "Show FAQ Section?", name: "showFaq", widget: "boolean", default: false}
-          - label: "FAQs"
-            name: "faqs"
-            widget: "list"
-            required: false
+          - label: "Global Settings"
+            name: "global"
+            widget: "object"
             fields:
-              - {label: "Question", name: "question", widget: "string"}
-              - {label: "Answer", name: "answer", widget: "text"}
-          - {label: "Show Testimonials Section?", name: "showTestimonials", widget: "boolean", default: false}
-          - label: "Testimonials"
-            name: "testimonials"
-            widget: "list"
-            required: false
+              - {label: "Contact Phone Number", name: "phoneNumber", widget: "string"}
+              - {label: "Company Email", name: "companyEmail", widget: "string", default: "info@majorleaguerestoration.com"}
+              - {label: "Form Access Key (Get at Web3Forms.com)", name: "formAccessKey", widget: "string", default: "", required: false, hint: "Paste your Web3Forms access key here to enable email alerts"}
+
+          - label: "Hero Section"
+            name: "hero"
+            widget: "object"
             fields:
-              - {label: "Client Name", name: "name", widget: "string"}
-              - {label: "Quote", name: "quote", widget: "text"}
-              - {label: "Rating (1-5)", name: "rating", widget: "number", default: 5}
-          - {label: "Show Recent Victories Section?", name: "showRecentVictories", widget: "boolean", default: true}
-          - label: "Recent Victories (Homepage)"
-            name: "recentVictories"
-            widget: "list"
-            required: false
+              - {label: "Title Line 1", name: "title1", widget: "string"}
+              - {label: "Title Line 2", name: "title2", widget: "string"}
+              - {label: "Tagline", name: "tagline", widget: "string"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+
+          - label: "About Us Section"
+            name: "about"
+            widget: "object"
             fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - {label: "Header", name: "header", widget: "string", default: "The Major League Difference"}
+              - {label: "Text", name: "text", widget: "text"}
               - {label: "Image", name: "image", widget: "image"}
-              - {label: "Tag/Badge Text (Optional)", name: "badge", widget: "string", required: false}
-              - {label: "Title (Optional)", name: "title", widget: "string", required: false}
-              - {label: "Description (Optional)", name: "description", widget: "string", required: false}
+
+          - label: "Services Section"
+            name: "servicesSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - label: "Services List"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Name", name: "name", widget: "string"}
+                  - {label: "Description", name: "description", widget: "text"}
+
+          - label: "Process Details (Road to Recovery)"
+            name: "processSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - {label: "Title", name: "title", widget: "string"}
+                  - {label: "Description", name: "description", widget: "text"}
+                  - {label: "Image", name: "image", widget: "image"}
+
+          - label: "Insurance Section"
+            name: "insuranceSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - {label: "Header", name: "header", widget: "string", default: "Insurance Claims"}
+              - {label: "Text", name: "text", widget: "text"}
+
+          - label: "Google & Yelp Customization"
+            name: "reviews"
+            widget: "object"
+            fields:
+              - {label: "Show Google?", name: "showGoogle", widget: "boolean", default: true}
+              - {label: "Google Link", name: "googleLink", widget: "string", required: false}
+              - {label: "Show Yelp?", name: "showYelp", widget: "boolean", default: true}
+              - {label: "Yelp Link", name: "yelpLink", widget: "string", required: false}
+
+          - label: "Recent Victories (Homepage)"
+            name: "victoriesSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Image", name: "image", widget: "image"}
+                  - {label: "Badge", name: "badge", widget: "string", required: false}
+                  - {label: "Title", name: "title", widget: "string", required: false}
+                  - {label: "Description", name: "description", widget: "string", required: false}
+
+          - label: "Client Testimonials"
+            name: "testimonialsSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Name", name: "name", widget: "string"}
+                  - {label: "Quote", name: "quote", widget: "text"}
+                  - {label: "Rating (1-5)", name: "rating", widget: "number", default: 5}
+
+          - label: "Frequently Asked Questions"
+            name: "faqSection"
+            widget: "object"
+            fields:
+              - {label: "Show Section?", name: "show", widget: "boolean", default: true}
+              - label: "Questions"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Question", name: "question", widget: "string"}
+                  - {label: "Answer", name: "answer", widget: "text"}
+
+          - label: "Footer Section"
+            name: "footerSection"
+            widget: "object"
+            fields:
+              - {label: "Company Description", name: "description", widget: "text"}
+              - {label: "License Number", name: "licenseNumber", widget: "string"}
+              - {label: "Service Area 1", name: "area1", widget: "string", default: "Santa Clarita Valley"}
+              - {label: "Service Area 2", name: "area2", widget: "string", default: "San Fernando Valley"}
+              - {label: "Service Area 3", name: "area3", widget: "string", default: "Los Angeles Center"}
+              - {label: "Service Area 4", name: "area4", widget: "string", default: "Orange County Coast"}
+
   - name: "gallery"
     label: "Gallery Projects"
     folder: "public/content/gallery"
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
+      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true}
       - {label: "Project Title", name: "title", widget: "string"}
       - {label: "Service Type", name: "serviceType", widget: "select", options: ["Water Damage", "Mold Remediation", "Build Back"]}
       - {label: "Short Description", name: "description", widget: "text"}
@@ -69,5 +150,6 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
+      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Title (Optional)", name: "title", widget: "string", required: false}
