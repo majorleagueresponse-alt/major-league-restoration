@@ -1,39 +1,39 @@
 {
   "global": {
-    "phoneNumber": "1 (800) 555-0199",
+    "phoneNumber": "(555) 555-0188",
     "companyEmail": "info@majorleaguerestoration.com",
     "formAccessKey": ""
   },
   "hero": {
-    "title1": "When every second",
-    "title2": "Counts.",
-    "tagline": "24/7 EMERGENCY RESPONSE",
-    "subtitle": "Top-rated water damage mitigation and mold remediation services from Santa Clarita to Orange County. We work directly with insurance companies so you don't have to."
+    "title1": "Major League",
+    "title2": "Response",
+    "tagline": "When Disaster Hits, We Step Up to the Plate",
+    "subtitle": "Professional water damage mitigation and mold remediation serving Southern California. We take the hassle out of your hands."
   },
   "about": {
     "show": true,
     "header": "The Major League Difference",
-    "text": "When you are dealing with catastrophic water damage or severe mold infestations, you need a team that operates with military precision. Major League Restoration was founded on the principles of speed, efficiency, and absolute transparency.\n\nWe skip the messy corporate bureaucracy. When you call us, you get a dedicated strike team utilizing commercial-grade extraction systems, advanced thermal imaging, and aggressive structural drying techniques. We document every square inch of the loss, bill your insurance directly, and get your property back to pre-loss conditions faster than anyone else in the industry.",
+    "text": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.\n\nWhen water damage strikes or mold infests your home, you shouldn't have to deal with amateur contractors. We step up to the plate with heavy-duty equipment, precise moisture mapping, and complete build-back services entirely handled in-house.",
     "image": "/images/for-website/major league difference .jpg"
   },
   "servicesSection": {
     "show": true,
     "items": [
       {
-        "name": "Water Damage Mitigation",
-        "description": "Rapid extraction, structural drying, and intensive dehumidification to halt secondary damage."
+        "name": "Water Mitigation",
+        "description": "Industrial water extraction, structural drying, and dehumidification. We solve leaks and floods fast."
       },
       {
         "name": "Mold Remediation",
-        "description": "Safe containment, rigorous HEPA air scrubbing, and total bio-washing clearance."
+        "description": "Safe containment, aggressive removal, and air scrubbing to ensure your home is breathable."
       },
       {
         "name": "Fire Damage",
         "description": "Soot removal, smoke odor elimination, and surface restoration after devastating fires."
       },
       {
-        "name": "Build Back / Reconstruction",
-        "description": "Turnkey solutions from emergency teardown to final paint and finish."
+        "name": "Build Back",
+        "description": "Full reconstruction services. Put the tear-out back together with our licensed contractors."
       },
       {
         "name": "Pack Out Services",
@@ -46,31 +46,31 @@
     "steps": [
       {
         "title": "Inspection",
-        "description": "Within hours, our response unit deploys to your property. We perform a complete thermal and moisture mapping sweep to identify all compromised material.",
+        "description": "We arrive rapidly, assess the damage, map moisture levels, and give you a clear, honest evaluation.",
         "image": "/images/for-website/inspection .jpg"
       },
       {
         "title": "Mitigation",
-        "description": "We establish heavy-duty containment barriers and immediately extract standing water or physically abate hazardous mold to stabilize the environment.",
+        "description": "Heavy duty extraction, tear-out of unsalvageable material, mold abatement, and industrial drying.",
         "image": "/images/for-website/mitigation.jpg"
       },
       {
         "title": "Restoration",
-        "description": "Once perfectly dry and cleared, our build-back division takes over, restoring drywall, flooring, and finishes to better-than-new condition.",
+        "description": "Rebuilding your property to pre-loss conditions while we handle the direct billing with insurance.",
         "image": "/images/for-website/restoration.jpg"
       }
     ]
   },
   "insuranceSection": {
     "show": true,
-    "header": "Zero Out-of-Pocket Headaches",
-    "text": "Dealing with an insurance adjuster can feel like a part-time job. We handle the entire claim process for you. From submitting the initial moisture mapping reports to negotiating the final build-back estimate, we utilize Xactimate pricing—the exact software your insurance uses—to guarantee your claim is fully covered."
+    "header": "Zero Hassle. Direct Billing.",
+    "text": "Dealing with property damage is stressful enough without fighting adjusters. As a Major League team, we handle the entire claim for you so you can focus on your life."
   },
   "reviews": {
     "showGoogle": false,
-    "googleLink": "https://google.com",
+    "googleLink": "",
     "showYelp": false,
-    "yelpLink": "https://yelp.com"
+    "yelpLink": ""
   },
   "victoriesSection": {
     "show": true,
@@ -120,15 +120,15 @@
     "items": [
       {
         "question": "How quickly can you arrive?",
-        "answer": "For emergency board-ups or active water intrusions, our dispatch team can usually deploy a mitigation squad to any property in Los Angeles County, Orange County, or the Santa Clarita Valley within 60 to 90 minutes."
+        "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
       },
       {
-        "question": "Will my insurance cover mold remediation?",
-        "answer": "It depends entirely on your specific policy limits and the cause of the mold. Sudden pipe bursts that result in mold are typically covered, whereas long-term neglect is often denied. Our inspectors will help you decipher your policy before we begin work."
+        "question": "Will you work directly with my insurance company?",
+        "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
       },
       {
-        "question": "Do I have to pay out of pocket before work starts?",
-        "answer": "Unless you are paying out-of-pocket as a cash client, we typically bill your insurance carrier directly for the mitigation and drying phases. You will only be responsible for your standard insurance deductible."
+        "question": "Is mold remediation safe for my family and pets?",
+        "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
       }
     ]
   },

@@ -151,6 +151,6 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
-      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true}
+      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true, required: false}
       - {label: "Image", name: "image", widget: "image"}
       - {label: "Title (Optional)", name: "title", widget: "string", required: false}
