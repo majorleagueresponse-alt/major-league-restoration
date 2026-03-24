@@ -1,30 +1,13 @@
 {
-  "heroTitle1": "Major League",
-  "heroTitle2": "Response",
-  "heroTagline": "When Disaster Hits, We Step Up to the Plate",
-  "heroSubtitle": "Professional water damage mitigation and mold remediation serving Southern California. We take the hassle out of your hands.",
-  "phoneNumber": "(555) 555-0199",
-  "aboutUsText": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.",
-  "showGoogleReviews": false,
-  "googleReviewsLink": "",
-  "showYelpReviews": false,
   "yelpReviewsLink": "",
-  "showFaq": true,
-  "faqs": [
-    {
-      "question": "How quickly can you arrive?",
-      "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
-    },
-    {
-      "question": "Will you work directly with my insurance company?",
-      "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
-    },
-    {
-      "question": "Is mold remediation safe for my family and pets?",
-      "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
-    }
-  ],
+  "showGoogleReviews": false,
+  "showYelpReviews": false,
+  "showAboutUs": true,
   "showTestimonials": true,
+  "heroSubtitle": "Professional water damage mitigation and mold remediation serving Southern California. We take the hassle out of your hands.",
+  "heroTitle1": "Major League",
+  "heroTagline": "When Disaster Hits, We Step Up to the Plate",
+  "heroTitle2": "Response",
   "testimonials": [
     {
       "name": "Sarah T., Irvine",
@@ -42,7 +25,6 @@
       "rating": 5
     }
   ],
-  "showRecentVictories": true,
   "recentVictories": [
     {
       "image": "/images/for-website/Highlight Reels/IMG_4265.jpg",
@@ -61,6 +43,25 @@
       "badge": "Build Back",
       "title": "Total Reconstruction",
       "description": "Restored to better than pre-loss conditions."
+    }
+  ],
+  "phoneNumber": "(555) 555-0188",
+  "showRecentVictories": true,
+  "aboutUsText": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.",
+  "showFaq": true,
+  "googleReviewsLink": "",
+  "faqs": [
+    {
+      "question": "How quickly can you arrive?",
+      "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
+    },
+    {
+      "question": "Will you work directly with my insurance company?",
+      "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
+    },
+    {
+      "question": "Is mold remediation safe for my family and pets?",
+      "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
     }
   ]
 }
