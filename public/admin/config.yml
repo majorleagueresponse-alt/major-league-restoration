@@ -135,6 +135,8 @@ collections:
   - name: "gallery"
     label: "Gallery Projects"
     folder: "public/content/gallery"
+    format: "json"
+    extension: "json"
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
@@ -148,6 +150,8 @@ collections:
   - name: "highlights"
     label: "Highlight Reels"
     folder: "public/content/highlights"
+    format: "json"
+    extension: "json"
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
