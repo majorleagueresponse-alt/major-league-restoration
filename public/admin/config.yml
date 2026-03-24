@@ -138,7 +138,7 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
-      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true}
+      - {label: "Visible on Site?", name: "visible", widget: "boolean", default: true, required: false}
       - {label: "Project Title", name: "title", widget: "string"}
       - {label: "Service Type", name: "serviceType", widget: "select", options: ["Water Damage", "Mold Remediation", "Build Back"]}
       - {label: "Short Description", name: "description", widget: "text"}
