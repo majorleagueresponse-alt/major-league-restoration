@@ -10,6 +10,18 @@ const highlightFiles = import.meta.glob('/public/content/highlights/*.json', { e
 const highlightItems = Object.values(highlightFiles).map((mod: any) => mod.default || mod);
 
 function GalleryPage() {
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData as any).toString()
+        }).then(() => alert("Thank you! Your event details have been securely received. Our dispatch team will contact you shortly."))
+          .catch(() => alert("There was an error submitting your request. Please try again."));
+        e.currentTarget.reset();
+    };
+
     return (
         <div className="bg-gray-50 text-gray-900 font-sans min-h-screen pt-24">
              {/* Navbar Component normally abstracted, hardcoded here for speed */}
@@ -91,19 +103,20 @@ function GalleryPage() {
                             </h3>
                             <p className="text-gray-600 mt-3 font-medium">Request a rapid evaluation from our major league team.</p>
                         </div>
-                        <form className="space-y-6">
+                        <form onSubmit={handleFormSubmit} name="contact" data-netlify="true" className="space-y-6">
+                            <input type="hidden" name="form-name" value="contact" />
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <input type="text" placeholder="First Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
-                                <input type="text" placeholder="Last Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                                <input type="text" name="firstName" placeholder="First Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                                <input type="text" name="lastName" placeholder="Last Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
                             </div>
-                            <input type="tel" placeholder="Phone Number" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
-                            <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium text-gray-600">
-                                <option>Water Damage Mitigation</option>
-                                <option>Mold Remediation</option>
-                                <option>Fire Damage</option>
-                                <option>Build Back / Construction</option>
+                            <input type="tel" name="phone" placeholder="Phone Number" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                            <select name="service" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium text-gray-600">
+                                <option value="Water Damage Mitigation">Water Damage Mitigation</option>
+                                <option value="Mold Remediation">Mold Remediation</option>
+                                <option value="Fire Damage">Fire Damage</option>
+                                <option value="Build Back / Construction">Build Back / Construction</option>
                             </select>
-                            <textarea placeholder="Additional Event Details (Optional)" rows={3} className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium"></textarea>
+                            <textarea name="eventDetails" placeholder="Additional Event Details (Optional)" rows={3} className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium"></textarea>
                             <button type="submit" className="w-full bg-dodger-blue text-white font-black py-5 rounded uppercase tracking-widest hover:bg-dodger-blue-hover shadow-lg hover:shadow-xl transition-all flex justify-center cursor-pointer gap-3 font-display text-lg">
                                 Submit Request <Send className="w-6 h-6"/>
                             </button>

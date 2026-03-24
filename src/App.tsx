@@ -399,19 +399,20 @@ function MainApp() {
                 <h3 className="text-3xl font-black text-gray-900 uppercase mb-8 flex items-center gap-3 font-display mt-2">
                    Request Evaluation
                 </h3>
-                <form className="space-y-6">
+                <form onSubmit={handleFormSubmit} name="contact" data-netlify="true" className="space-y-6">
+                    <input type="hidden" name="form-name" value="contact" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" placeholder="First Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
-                        <input type="text" placeholder="Last Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                        <input type="text" name="firstName" placeholder="First Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                        <input type="text" name="lastName" placeholder="Last Name" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
                     </div>
-                    <input type="tel" placeholder="Phone Number" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
-                    <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium text-gray-600">
-                        <option>Water Damage Mitigation</option>
-                        <option>Mold Remediation</option>
-                        <option>Fire Damage</option>
-                        <option>Build Back / Construction</option>
+                    <input type="tel" name="phone" placeholder="Phone Number" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium" required />
+                    <select name="service" className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium text-gray-600">
+                        <option value="Water Damage Mitigation">Water Damage Mitigation</option>
+                        <option value="Mold Remediation">Mold Remediation</option>
+                        <option value="Fire Damage">Fire Damage</option>
+                        <option value="Build Back / Construction">Build Back / Construction</option>
                     </select>
-                    <textarea placeholder="Additional Event Details (Optional)" rows={3} className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium"></textarea>
+                    <textarea name="eventDetails" placeholder="Additional Event Details (Optional)" rows={3} className="w-full bg-gray-50 border border-gray-200 p-4 rounded outline-none focus:border-dodger-blue focus:ring-2 focus:ring-dodger-blue/20 transition-all font-medium"></textarea>
                     <button type="submit" className="w-full bg-dodger-blue text-white font-black py-5 rounded uppercase tracking-widest hover:bg-dodger-blue-hover shadow-lg hover:shadow-xl transition-all flex justify-center cursor-pointer gap-3 font-display text-lg">
                         Submit Request <Send className="w-6 h-6"/>
                     </button>
