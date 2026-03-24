@@ -68,32 +68,36 @@ function GalleryPage() {
                 </div>
             </nav>
 
-            <header className="bg-dodger-blue text-white py-20 relative overflow-hidden text-center">
-                <h1 className="text-5xl md:text-6xl font-black uppercase font-display mb-4">Our Record</h1>
-                <p className="text-xl text-blue-100 font-medium max-w-2xl mx-auto">See the before and after transformations of our major league restoration projects.</p>
-            </header>
+            {globalSettings?.showGallerySection !== false && (
+                <>
+                    <header className="bg-dodger-blue text-white py-20 relative overflow-hidden text-center">
+                        <h1 className="text-5xl md:text-6xl font-black uppercase font-display mb-4">Our Record</h1>
+                        <p className="text-xl text-blue-100 font-medium max-w-2xl mx-auto">See the before and after transformations of our major league restoration projects.</p>
+                    </header>
 
-            <section className="py-16">
-                <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {activeGallery.map((item: any, index: number) => (
-                         <div key={index} className="bg-white rounded-md shadow-xl overflow-hidden border border-gray-100 flex flex-col">
-                            <div className="relative h-64 overflow-hidden group">
-                                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute top-4 left-4 bg-dodger-blue text-white text-xs font-black px-3 py-1 rounded uppercase tracking-widest">{item.serviceType}</div>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-2xl font-black text-gray-900 uppercase font-display mb-2">{item.title}</h3>
-                                <p className="text-gray-600 font-medium text-sm leading-relaxed">{item.description}</p>
-                            </div>
+                    <section className="py-16">
+                        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {activeGallery.map((item: any, index: number) => (
+                                 <div key={index} className="bg-white rounded-md shadow-xl overflow-hidden border border-gray-100 flex flex-col">
+                                    <div className="relative h-64 overflow-hidden group">
+                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute top-4 left-4 bg-dodger-blue text-white text-xs font-black px-3 py-1 rounded uppercase tracking-widest">{item.serviceType}</div>
+                                    </div>
+                                    <div className="p-6">
+                                        <h3 className="text-2xl font-black text-gray-900 uppercase font-display mb-2">{item.title}</h3>
+                                        <p className="text-gray-600 font-medium text-sm leading-relaxed">{item.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                            {activeGallery.length === 0 && (
+                                <div className="col-span-full text-center text-gray-500 py-12 font-medium">
+                                    No active gallery projects found. View your CMS dashboard to add or unhide them!
+                                </div>
+                            )}
                         </div>
-                    ))}
-                    {activeGallery.length === 0 && (
-                        <div className="col-span-full text-center text-gray-500 py-12 font-medium">
-                            No active gallery projects found. View your CMS dashboard to add or unhide them!
-                        </div>
-                    )}
-                </div>
-            </section>
+                    </section>
+                </>
+            )}
 
             {/* Highlight Reels Section */}
             {activeHighlights.length > 0 && (

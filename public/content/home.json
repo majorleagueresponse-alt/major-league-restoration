@@ -2,7 +2,8 @@
   "global": {
     "phoneNumber": "(555) 555-0188",
     "companyEmail": "info@majorleaguerestoration.com",
-    "formAccessKey": ""
+    "formAccessKey": "",
+    "showGallerySection": false
   },
   "hero": {
     "title1": "Major League",

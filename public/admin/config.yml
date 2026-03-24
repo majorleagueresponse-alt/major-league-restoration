@@ -20,6 +20,7 @@ collections:
               - {label: "Contact Phone Number", name: "phoneNumber", widget: "string"}
               - {label: "Company Email", name: "companyEmail", widget: "string", default: "info@majorleaguerestoration.com"}
               - {label: "Form Access Key (Get at Web3Forms.com)", name: "formAccessKey", widget: "string", default: "", required: false, hint: "Paste your Web3Forms access key here to enable email alerts"}
+              - {label: "Show Main Gallery Section?", name: "showGallerySection", widget: "boolean", default: false, required: false}
 
           - label: "Hero Section"
             name: "hero"

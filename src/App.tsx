@@ -9,7 +9,7 @@ import GalleryPage from './pages/GalleryPage';
 import CitySeoPage from './pages/CitySeoPage';
 
 export interface HomeContent {
-  global?: { phoneNumber: string, companyEmail: string, formAccessKey: string };
+  global?: { phoneNumber: string, companyEmail: string, formAccessKey: string, showGallerySection?: boolean };
   hero?: { title1: string, title2: string, tagline: string, subtitle: string };
   about?: { show: boolean, header: string, text: string, image: string };
   servicesSection?: { show: boolean, items: Array<{name: string, description: string}> };
