@@ -1,21 +1,9 @@
 {
   "global": {
-    "phoneNumber": "(555) 555-0188",
+    "phoneNumber": "(818) 317-3867",
     "companyEmail": "info@majorleaguerestoration.com",
     "formAccessKey": "",
     "showGallerySection": false
-  },
-  "hero": {
-    "title1": "Major League",
-    "title2": "Response",
-    "tagline": "When Disaster Hits, We Step Up to the Plate",
-    "subtitle": "Professional water damage mitigation and mold remediation serving Southern California. We take the hassle out of your hands."
-  },
-  "about": {
-    "show": true,
-    "header": "The Major League Difference",
-    "text": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.\n\nWhen water damage strikes or mold infests your home, you shouldn't have to deal with amateur contractors. We step up to the plate with heavy-duty equipment, precise moisture mapping, and complete build-back services entirely handled in-house.",
-    "image": "/images/for-website/major league difference .jpg"
   },
   "servicesSection": {
     "show": true,
@@ -42,23 +30,33 @@
       }
     ]
   },
-  "processSection": {
-    "show": true,
-    "steps": [
+  "footerSection": {
+    "description": "Premium water mitigation and mold remediation services. We play in the Major Leagues so you don't have to worry.",
+    "licenseNumber": "Lic# 12345678",
+    "serviceAreas": [
       {
-        "title": "Inspection",
-        "description": "We arrive rapidly, assess the damage, map moisture levels, and give you a clear, honest evaluation.",
-        "image": "/images/for-website/inspection .jpg"
+        "city": "Santa Clarita"
       },
       {
-        "title": "Mitigation",
-        "description": "Heavy duty extraction, tear-out of unsalvageable material, mold abatement, and industrial drying.",
-        "image": "/images/for-website/mitigation.jpg"
+        "city": "San Fernando Valley"
       },
       {
-        "title": "Restoration",
-        "description": "Rebuilding your property to pre-loss conditions while we handle the direct billing with insurance.",
-        "image": "/images/for-website/restoration.jpg"
+        "city": "Los Angeles"
+      },
+      {
+        "city": "Orange County"
+      },
+      {
+        "city": "Irvine"
+      },
+      {
+        "city": "Anaheim"
+      },
+      {
+        "city": "Yorba Linda"
+      },
+      {
+        "city": "Pasadena"
       }
     ]
   },
@@ -67,11 +65,48 @@
     "header": "Zero Hassle. Direct Billing.",
     "text": "Dealing with property damage is stressful enough without fighting adjusters. As a Major League team, we handle the entire claim for you so you can focus on your life."
   },
-  "reviews": {
-    "showGoogle": false,
-    "googleLink": "",
-    "showYelp": false,
-    "yelpLink": ""
+  "about": {
+    "show": true,
+    "header": "The Major League Difference",
+    "text": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.\n\nWhen water damage strikes or mold infests your home, you shouldn't have to deal with amateur contractors. We step up to the plate with heavy-duty equipment, precise moisture mapping, and complete build-back services entirely handled in-house.",
+    "image": "/images/for-website/major league difference .jpg"
+  },
+  "faqSection": {
+    "show": true,
+    "items": [
+      {
+        "question": "How quickly can you arrive?",
+        "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
+      },
+      {
+        "question": "Will you work directly with my insurance company?",
+        "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
+      },
+      {
+        "question": "Is mold remediation safe for my family and pets?",
+        "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
+      }
+    ]
+  },
+  "testimonialsSection": {
+    "show": true,
+    "items": [
+      {
+        "name": "Sarah T., Irvine",
+        "quote": "They arrived within 45 minutes of my frantic call. A pipe burst in the kitchen and flooded into the living room, but their crew extracted the water and set up drying equipment so fast that our hardwood floors were saved. Highly recommend their professionalism.",
+        "rating": 5
+      },
+      {
+        "name": "Mark D., Santa Clarita",
+        "quote": "Dealt with a difficult mold issue in our attic that another company failed to fully clear. Major League Response handled the abatement clean and quick, and their communication throughout the insurance process was phenomenal.",
+        "rating": 5
+      },
+      {
+        "name": "Jessica L., Orange County",
+        "quote": "After a small kitchen fire, the smoke damage was overwhelming. The team cleaned, deodorized, and completely rebuilt the damaged cabinets. It looks better now than it did before the incident.",
+        "rating": 5
+      }
+    ]
   },
   "victoriesSection": {
     "show": true,
@@ -96,55 +131,36 @@
       }
     ]
   },
-  "testimonialsSection": {
+  "processSection": {
     "show": true,
-    "items": [
+    "steps": [
       {
-        "name": "Sarah T., Irvine",
-        "quote": "They arrived within 45 minutes of my frantic call. A pipe burst in the kitchen and flooded into the living room, but their crew extracted the water and set up drying equipment so fast that our hardwood floors were saved. Highly recommend their professionalism.",
-        "rating": 5
+        "title": "Inspection",
+        "description": "We arrive rapidly, assess the damage, map moisture levels, and give you a clear, honest evaluation.",
+        "image": "/images/for-website/inspection .jpg"
       },
       {
-        "name": "Mark D., Santa Clarita",
-        "quote": "Dealt with a difficult mold issue in our attic that another company failed to fully clear. Major League Response handled the abatement clean and quick, and their communication throughout the insurance process was phenomenal.",
-        "rating": 5
+        "title": "Mitigation",
+        "description": "Heavy duty extraction, tear-out of unsalvageable material, mold abatement, and industrial drying.",
+        "image": "/images/for-website/mitigation.jpg"
       },
       {
-        "name": "Jessica L., Orange County",
-        "quote": "After a small kitchen fire, the smoke damage was overwhelming. The team cleaned, deodorized, and completely rebuilt the damaged cabinets. It looks better now than it did before the incident.",
-        "rating": 5
+        "title": "Restoration",
+        "description": "Rebuilding your property to pre-loss conditions while we handle the direct billing with insurance.",
+        "image": "/images/for-website/restoration.jpg"
       }
     ]
   },
-  "faqSection": {
-    "show": true,
-    "items": [
-      {
-        "question": "How quickly can you arrive?",
-        "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
-      },
-      {
-        "question": "Will you work directly with my insurance company?",
-        "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
-      },
-      {
-        "question": "Is mold remediation safe for my family and pets?",
-        "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
-      }
-    ]
+  "hero": {
+    "title1": "Major League",
+    "title2": "Response",
+    "tagline": "When Disaster Hits, We Step Up to the Plate",
+    "subtitle": "Professional water damage mitigation and mold remediation serving Southern California. We take the hassle out of your hands."
   },
-  "footerSection": {
-    "description": "Premium water mitigation and mold remediation services. We play in the Major Leagues so you don't have to worry.",
-    "licenseNumber": "Lic# 12345678",
-    "serviceAreas": [
-      {"city": "Santa Clarita"},
-      {"city": "San Fernando Valley"},
-      {"city": "Los Angeles"},
-      {"city": "Orange County"},
-      {"city": "Irvine"},
-      {"city": "Anaheim"},
-      {"city": "Yorba Linda"},
-      {"city": "Pasadena"}
-    ]
+  "reviews": {
+    "showGoogle": false,
+    "googleLink": "",
+    "showYelp": false,
+    "yelpLink": ""
   }
 }
