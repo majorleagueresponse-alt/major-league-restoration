@@ -9,7 +9,7 @@ import GalleryPage from './pages/GalleryPage';
 import CitySeoPage from './pages/CitySeoPage';
 
 export interface HomeContent {
-  global?: { phoneNumber: string, companyEmail: string, formAccessKey: string, showGallerySection?: boolean };
+  global?: { phoneNumber: string, secondaryPhoneNumber?:string; companyEmail: string, formAccessKey: string, showGallerySection?: boolean };
   hero?: { title1: string, title2: string, tagline: string, subtitle: string };
   about?: { show: boolean, header: string, text: string, image: string };
   servicesSection?: { show: boolean, items: Array<{name: string, description: string}> };
@@ -66,7 +66,7 @@ function MainApp() {
   if (!homeContent) return <div className="min-h-screen flex items-center justify-center font-display text-dodger-blue text-2xl animate-pulse">Loading Setup...</div>;
 
   const phone = homeContent.global?.phoneNumber || "1 (800) 555-0199";
-
+  const secondaryPhone = homeContent.global?.secondaryPhoneNumber || "(818) 966-6069";
   return (
     <div className="bg-white text-gray-900 font-sans selection:bg-dodger-blue selection:text-white">
       {/* Navigation */}
@@ -86,6 +86,9 @@ function MainApp() {
             <a href={`tel:${phone.replace(/\D/g,'')}`} className="flex items-center gap-2 bg-dodger-red text-white px-5 py-2.5 rounded shadow-lg shadow-dodger-red/30 font-display font-bold uppercase text-sm hover:bg-dodger-red-hover hover:scale-105 transition-all">
               <PhoneCall className="w-4 h-4" /> {phone}
             </a>
+            <a href={`tel:${secondaryPhone.replace(/\D/g,'')}`} className="flex items-center gap-2">
+<Phone className="w-4 h-4" /> {secondaryPhone}
+</a>
           </div>
           <button className="lg:hidden focus:outline-none text-dodger-blue" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}

@@ -1,6 +1,7 @@
 {
   "global": {
-    "phoneNumber": "(818) 317-3867",
+    "phoneNumber": "(628) 284-0977",
+    "secondaryPhoneNumber": "(818) 966-6069",
     "companyEmail": "majorleagueresponse@gmail.com",
     "formAccessKey": "7916f9a1-3b0f-4403-9872-2ab95ef22f30",
     "showGallerySection": false
@@ -9,29 +10,26 @@
     "show": true,
     "items": [
       {
-        "name": "Water Mitigation",
-        "description": "Industrial water extraction, structural drying, and dehumidification. We solve leaks and floods fast."
+        "name": "Water Damage Mitigation",
+        "description": "24/7 emergency water extraction, structural drying, moisture monitoring, and professional damage mitigation for residential and commercial properties.",
       },
       {
         "name": "Mold Remediation",
-        "description": "Safe containment, aggressive removal, and air scrubbing to ensure your home is breathable."
+        "description": "Professional mold remediation including containment, HEPA air filtration, removal of affected materials, and detailed cleaning for residential and commercial properties.,"."
       },
       {
-        "name": "Fire Damage",
-        "description": "Soot removal, smoke odor elimination, and surface restoration after devastating fires."
+        "name": "Fire & Smoke Damage",
+        "description": "Professional fire and smoke damage cleanup including soot removal, smoke odor control, HEPA cleaning, and detailed surface cleaning for residential and commercial properties."
       },
+     
       {
-        "name": "Build Back",
-        "description": "Full reconstruction services. Put the tear-out back together with our licensed contractors."
-      },
-      {
-        "name": "Pack Out Services",
-        "description": "Safe inventory, packing, and climate-controlled storage of your belongings during the restoration process."
+        "name": "Contents Pack-Out / Pack-Back",
+        "description": "Professional contents pack-out and pack-back services including inventory, careful packing, transportation, storage coordination, and return of contents when the property is ready."
       }
     ]
   },
   "footerSection": {
-    "description": "Premium water mitigation and mold remediation services. We play in the Major Leagues so you don't have to worry.",
+    "description": "24/7 property damage response specializing in water damage mitigation, mold remediation, fire and smoke damage cleanup, and contents pack-out / pack-back services.",
     "licenseNumber": " ",
     "serviceAreas": [
       {
@@ -44,52 +42,83 @@
         "city": "Los Angeles"
       },
       {
-        "city": "Orange County"
-      },
-      {
-        "city": "Irvine"
-      },
-      {
-        "city": "Anaheim"
-      },
-      {
-        "city": "Yorba Linda"
-      },
-      {
         "city": "Pasadena"
-      }
+      },
+      {
+        "city": "Burbank"
+      },
+      {
+        "city": "Glendale"
+      },
+      {
+        "city": "North Hollywood"
+      },
+      {
+        "city": "Sherman Oaks"
+      },   
+      {
+        "city": "Encino"
+      },
+      { 
+        "city": "Studio City"
+      },
+      { 
+        "city": "Woodland Hills"
+      },
+      { 
+        "city": "Northridge"
+      },
+      {
+        "city": "Granada Hills"
+      },
+      {
+        "city": "Van Nuys"
+      },
+      {
+        "city": "Chatsworth"
+      },
+      {
+        "city": "Sylmar"
+      },
+      {
+        "city": "Calabasas"
+      },
+      {
+        "city": "Santa Monica"
+      },
     ]
+  
   },
   "insuranceSection": {
     "show": true,
-    "header": "Zero Hassle. Direct Billing.",
-    "text": "Dealing with property damage is stressful enough without fighting adjusters. As a Major League team, we handle the entire claim for you so you can focus on your life."
+    "header": "Insurance Claim Assistance",
+    "text": "When insurance is involved, we help document the damage, provide detailed estimates and supporting information, and communicate with your insurance carrier throughout the restoration process. Coverage and payment decisions are determined by your insurance company and policy."
   },
   "about": {
     "show": true,
     "header": "The Major League Difference",
-    "text": "Major League Response is Southern California's premier water damage, mold remediation, and disaster recovery experts. We believe in providing championship-level service when you need it most. Our certified technicians are on standby 24/7 to step up to the plate and restore your property.\n\nWhen water damage strikes or mold infests your home, you shouldn't have to deal with amateur contractors. We step up to the plate with heavy-duty equipment, precise moisture mapping, and complete build-back services entirely handled in-house.",
+    "text": "Major League Response provides 24/7 water damage mitigation, mold remediation, fire and smoke damage cleanup, and contents pack-out and pack-back services for residential and commercial properties throughout Los Angeles and surrounding Southern California communities. Our IICRC-certified team focuses on fast response, professional documentation, clear communication, and quality service from the initial inspection through completion.",
     "image": "/images/for-website/major league difference .jpg"
   },
   "faqSection": {
     "show": true,
     "items": [
       {
-        "question": "How quickly can you arrive?",
-        "answer": "We pride ourselves on our 60-minute rapid response. When water damage occurs, time is of the essence, so we always have a crew on standby ready to deploy across Southern California."
+        "question": "Do you provide 24/7 emergency water damage response?",
+        "answer": "Yes. Major League Response provides 24/7 emergency water damage response throughout Los Angeles and surrounding service areas. We respond as quickly as possible to begin water extraction, moisture assessment, and structural drying when needed."
       },
       {
-        "question": "Will you work directly with my insurance company?",
-        "answer": "Yes. We handle the entire claim process and bill your insurance directly. We provide all the necessary moisture logs, photos, and documentation so you don't have to fight the adjusters."
+        "question": "Do you work with insurance companies for water, mold, and fire damage claims?",
+        "answer": "Yes. When insurance is involved, we can document the damage, prepare detailed estimates, provide photos and supporting documentation, and communicate with your insurance carrier regarding our scope of work. Coverage and claim decisions are determined by your insurance company and policy."
       },
       {
-        "question": "Is mold remediation safe for my family and pets?",
-        "answer": "Absolutely. We use professional-grade containment barriers and HEPA air scrubbers to isolate the affected area, ensuring that mold spores do not spread to the rest of the house during the removal process."
+        "question": "How do you handle professional mold remediation?",
+        "answer": "Our mold remediation process may include containment, HEPA air filtration, removal of affected materials, and detailed cleaning based on the conditions and scope of work. When required, post-remediation clearance testing can be performed by an independent third party."
       }
     ]
   },
   "testimonialsSection": {
-    "show": true,
+    "show": false,
     "items": [
       {
         "name": "Sarah T., Irvine",
@@ -141,14 +170,10 @@
       },
       {
         "title": "Mitigation",
-        "description": "Heavy duty extraction, tear-out of unsalvageable material, mold abatement, and industrial drying.",
+        "description": "Water extraction, removal of affected materials when necessary, structural drying, moisture monitoring, and professional cleaning based on the documented scope of work.",
         "image": "/images/for-website/mitigation.jpg"
       },
-      {
-        "title": "Restoration",
-        "description": "Rebuilding your property to pre-loss conditions while we handle the direct billing with insurance.",
-        "image": "/images/for-website/restoration.jpg"
-      }
+      
     ]
   },
   "hero": {
@@ -160,7 +185,7 @@
   "reviews": {
     "showGoogle": false,
     "googleLink": "",
-    "showYelp": false,
-    "yelpLink": ""
+    "showYelp": true,
+    "yelpLink": "https://yelp.to/VgR-Lmsmw1"
   }
 }
